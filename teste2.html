@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <style>
+         * {
+         box-sizing: border-box;
+         }
+         input[type=text], select, textarea {
+         width: 100%;
+         padding: 12px;
+         border: 1px solid #ccc;
+         border-radius: 4px;
+         resize: vertical;
+         }
+         label {
+         padding: 12px 12px 12px 0;
+         display: inline-block;
+         font-weight: bold;
+         }
+         button[type=submit] {
+         background-color: #4CAF50;
+         color: white;
+         padding: 12px 20px;
+         border: none;
+         border-radius: 4px;
+         cursor: pointer;
+         }
+         button[type=submit]:hover {
+         background-color: #45a049;
+         }
+         .container {
+         border-radius: 5px;
+         background-color: #f2f2f2;
+         padding: 20px;
+         }
+         .col-25 {
+         float: left;
+         width: 25%;
+         margin-top: 6px;
+         }
+         .col-75 {
+         float: left;
+         width: 75%;
+         margin-top: 6px;
+         }
+         /* Clear floats after the columns */
+         .row:after {
+         content: "";
+         display: table;
+         clear: both;
+         }
+         /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other */
+         @media screen and (max-width: 600px) {
+         .col-25, .col-75, input[type=submit] {
+         width: 100%;
+         margin-top: 0;
+         }
+         }
+      </style>
+   </head>
+   <body>
+      <h2>Formulário de cadastro de viagem</h2>
+      <div class="container">
+         <form>
+            <div class="row">
+               <div class="col-25">
+                  <label for="nome">Nome completo</label>
+               </div>
+               <div class="col-75">
+                  <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo">
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-25">
+                  <label for="email">E-mail</label>
+               </div>
+               <div class="col-75">
+                  <input type="text" id="email" name="email" placeholder="Digite seu e-mail">
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-25">
+                  <label for="destino">Destino da viagem</label>
+               </div>
+               <div class="col-75">
+                  <textarea id="destino" name="destino" placeholder="Digite o destino da sua viagem" style="height:100px"></textarea>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-25">
+                  <label for="foto">Foto do documento</label>
+               </div>
+               <div class="col-75">
+                  <input type="file" accept="image/*" capture="camera" id="foto" name="foto">
+               </div>
+            </div>
+            <div class="row">
+   
+			   <button type="submit" onclick="enviar()">Registrar</button>
+
+<script>
+
+    function enviar() {
+        // recupera os valores dos campos
+        var nome = document.getElementById('nome').value;
+        var email = document.getElementById('email').value;
+        var destino = document.getElementById('destino').value;
+        var imagem = document.getElementById('imagem').src;
+        
+        // valida se os campos foram preenchidos
+        if (nome == "" || email == "" || destino == "" || imagem == "") {
+            alert("Por favor, preencha todos os campos");
+            return;
+        }
+        
+        // monta o corpo do e-mail
+        var corpoEmail = "Nome: " + nome + "\n" + "Email: " + email + "\n" + "Destino: " + destino;
+        
+        // abre o aplicativo de e-mail padrão do dispositivo com os campos preenchidos
+        window.location.href = "mailto:adm@tech2work.com?subject=Cadastro&body=" + corpoEmail + "&attachment=" + imagem;
+        
+        // limpa os campos do formulário após o envio do e-mail
+        document.getElementById('nome').value = "";
+        document.getElementById('email').value = "";
+        document.getElementById('destino').value = "";
+        document.getElementById('imagem').src = "";
+    }
+</script>
+
